@@ -60,6 +60,7 @@ class Dashboard extends Component {
                 timestamp: (new Date()).toLocaleTimeString()
             })
                 .then(function() {
+                    document.getElementById('writeBox').value = ""
                     console.log("Document successfully written!");
                 })
                 .catch(function(error) {
@@ -86,13 +87,13 @@ class Dashboard extends Component {
                                     ))}
                                 </NavDropdown>
                             </Nav>
-                            <Button variant="outline-success" onClick={this.signOut}>Sign Out</Button>
+                            <Button variant="outline-danger" onClick={this.signOut}>Sign Out</Button>
                         </Navbar.Collapse>
                     </Navbar>
                     <div  className="post" style={{height: '200px'}}>
                         <textarea id="writeBox" type="textarea" className="write-post"/>
                        <div className="postButtonContainer">
-                           <Button className="post-button" variant="outline-success" onClick={this.post}>Post</Button>
+                           <Button className="post-button" variant="outline-primary" onClick={this.post}>Post</Button>
                        </div>
                     </div>
 
