@@ -1,6 +1,7 @@
 .App {
-  text-align: center;
+  text-align: center; background-color: #FFFFFF;
 }
+
 
 .App-logo {
   height: 40vmin;
@@ -26,6 +27,29 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.posts {
+  width: 600px;
+}
+
+.write-post{
+  margin: 20px;
+  float: left;
+  border: transparent;
+  outline: none;
+  resize: none;
+  border-radius:12px;
+  height:100px;
+  width:460px;
+}
+.postButtonContainer{
+  float: right;
+  margin-right: 20px;
+}
+
+.post-button{
+  float: right;
 }
 
 @keyframes App-logo-spin {

@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import './css/App.css';
+import Post from "./Post";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Navbar, Nav, Form, FormControl, Button, NavDropdown} from 'react-bootstrap'
+import {BrowserRouter, Link, Route, Redirect} from 'react-router-dom'
+import Home from "./Home";
+import React from "react";
+import firebase from "firebase";
+import {connect} from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import SignIn from "./firebase/SignIn";
+import Dashboard from "./Dashboard";
+
+class App extends React.Component {
+
+    constructor(props) {
+
+        super(props);
+        this.state = {
+            authenticated: false
+        }
+    }
+
+    componentWillMount() {
+        let context = this
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                context.props.login()
+            } else {
+                context.props.logout()
+            }
+        });
+    }
+
+    render() {
+      return (<div>
+          {this.props.authenticated ? <Dashboard/> : <SignIn/>}
+          </div>
+      );
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+    ...state
+});
+
+const mapDispatchToProps = dispatch => ({
+    login: () => dispatch({type: 'signIn'}),
+    logout: () => dispatch({type: 'signOut'})
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
